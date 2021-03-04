@@ -2,13 +2,12 @@
 // import "./styles/index.scss";
 
 import Router from "./Router";
-import dom from "./utils/dom";
+import Dom from "./Dom";
 
-dom(
+Dom.print(
   document.querySelector("#root"),
-  "PinnerHTML",
   `${Router.setRouter([
     { route: "/", component: "<div>abc</div>" },
-    { route: "/test/:id", component: "<div>test</div>" },
+    { route: "/test/", component: "<div>test</div>" },
   ])}`
 );
