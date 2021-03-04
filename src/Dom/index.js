@@ -23,7 +23,7 @@ const domController = (el, ...arg) => {
 let root = null;
 
 const shouldUpdate = (el, tmpl) => {
-  if (el === root && el.innerHTML === "") {
+  if (el === root && el.innerHTML === "" && !el.outerHTML.includes("id=")) {
     return true;
   }
   const beforeHTML = root.outerHTML;
