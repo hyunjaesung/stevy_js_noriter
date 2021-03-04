@@ -36,12 +36,12 @@ const getCurComponent = () => {
 
 const Router = {
   setRouter(components = []) {
-    window.addEventListener("DOMContentLoaded", this.render);
+    window.addEventListener("DOMContentLoaded", this._render);
     _components = [...components];
     return '<div id="router"></div>';
   },
 
-  render() {
+  _render() {
     if (_routerDom === null) {
       _routerDom = document.querySelector("#router");
     }
@@ -56,7 +56,7 @@ const Router = {
 
   routing(route, _ = type(route, "string")) {
     window.history.replaceState(null, "", route);
-    this.render();
+    this._render();
   },
 };
 
