@@ -2,7 +2,7 @@ import type from "../utils/type";
 import Dom from "../Dom";
 
 let _components = []; // {route, component}[]
-let _routerDom = null;
+let _root = null;
 
 const deleteSlash = (string = "") => {
   if (string === "/") return string;
@@ -35,28 +35,29 @@ const getCurComponent = () => {
 };
 
 const Router = {
-  setRouter(components = []) {
-    window.addEventListener("DOMContentLoaded", this._render);
+  init(components = []) {
+    window.addEventListener("DOMContentLoaded", this.render);
     _components = [...components];
     return '<div id="router"></div>';
   },
 
-  _render() {
-    if (_routerDom === null) {
-      _routerDom = document.querySelector("#router");
+  render() {
+    if (_root === null) {
+      _root = document.querySelector("#router");
     }
 
-    const cur = getCurComponent();
-    if (cur === undefined) {
+    const { component } = getCurComponent();
+    if (component === undefined) {
       window.location.href = window.location.origin;
     } else {
-      Dom.print(_routerDom, `${cur.component}`);
+      console.log(component);
+      component.render({ root: _root });
     }
   },
 
   routing(route, _ = type(route, "string")) {
     window.history.replaceState(null, "", route);
-    this._render();
+    this.render();
   },
 };
 
