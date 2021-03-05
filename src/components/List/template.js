@@ -1,6 +1,12 @@
 const Item = ({ url }) => `
         <div class="gif_item">
-            <div class="thumb" style="background: url(${url}) no-repeat center center"></div>
+          <div class="thumb" style="background: url(${url}) no-repeat center center"></div>
+            <div class="modal hidden">
+              <div class="modal__overlay"></div>
+              <div class="modal__content">
+                <div class="modal__image" style="background: url(${url}) no-repeat center center"></div>
+              </div>
+            </div>
         </div>
     `;
 

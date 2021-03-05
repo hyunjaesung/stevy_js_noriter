@@ -20,6 +20,17 @@ function infiniteScrollHandler(e) {
   }
 }
 
+const clickHandler = (e) => {
+  const gifWrapper = e.target.closest(".gif_item");
+  if (!gifWrapper) return;
+  const modal = gifWrapper.querySelector(".modal");
+  if (modal.classList.contains("hidden")) {
+    modal.classList.remove("hidden");
+  } else {
+    modal.classList.add("hidden");
+  }
+};
+
 const List = {
   async beforeRender() {
     const {
@@ -54,6 +65,7 @@ const List = {
     const infiniteHandler = throttle(infiniteScrollHandler.bind(this), 1000);
     if (_isFirstRender) {
       window.addEventListener("scroll", infiniteHandler);
+      window.addEventListener("click", clickHandler);
     } else if (!_state.hasPagination) {
       window.removeEventListener("scroll", infiniteHandler);
     }
