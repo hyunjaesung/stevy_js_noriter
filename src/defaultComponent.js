@@ -10,9 +10,9 @@ const template = () => `
 `;
 
 const Component = {
-  init(injection) {
-    // 따로 외부에 root 설정 하거나 의존성 필요한 컴퍼넌트 넣거나 할때
-    Component.inject(injection);
+  init(components) {
+    // 따로 외부에 root 설정 하거나 자식 컴퍼넌트 넣거나 할때
+    Component.inject(components);
     window.addEventListener("DOMContentLoaded", this.render);
     return `<div id="component" ></div>`;
   },
