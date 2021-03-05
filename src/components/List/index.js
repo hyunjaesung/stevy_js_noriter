@@ -2,6 +2,7 @@ import Dom from "../Dom";
 import throttle from "../../utils/throttle";
 import { getGifData } from "./api";
 import template from "./template";
+import { clickHandler, infiniteScrollHandler, IOHandler } from "./eventHandler";
 
 let _state = { apiData: [], page: 0, hasPagination: true };
 let _isFirstRender = true;
@@ -9,27 +10,6 @@ let _root = null;
 let _components = [];
 
 const LIMIT = 30;
-
-function infiniteScrollHandler(e) {
-  const scrollHeight = document.documentElement.scrollHeight;
-  const scrollTop = document.documentElement.scrollTop;
-  const clientHeight = document.documentElement.clientHeight;
-
-  if (scrollTop + clientHeight >= scrollHeight * 0.8) {
-    this.render();
-  }
-}
-
-const clickHandler = (e) => {
-  const gifWrapper = e.target.closest(".gif_item");
-  if (!gifWrapper) return;
-  const modal = gifWrapper.querySelector(".modal");
-  if (modal.classList.contains("hidden")) {
-    modal.classList.remove("hidden");
-  } else {
-    modal.classList.add("hidden");
-  }
-};
 
 const List = {
   async beforeRender() {
@@ -41,7 +21,7 @@ const List = {
       offset: _state.page * LIMIT,
     });
     _state.page += 1;
-    _state.apiData = [..._state.apiData, ...data];
+    _state.apiData = [...data];
     if (total_count - LIMIT <= _state.page * LIMIT) {
       _state.hasPagination = false;
     }
@@ -56,7 +36,12 @@ const List = {
     if (!_root) return;
 
     await this.beforeRender();
-    Dom.print(_root, template({ ..._state, ...props }));
+    Dom.print(
+      _root,
+      _state.page > 1
+        ? `${_root.innerHTML}${template({ ..._state, ...props })}`
+        : template({ ..._state, ...props })
+    );
     this.afterRender();
     _isFirstRender = false;
   },
@@ -69,6 +54,13 @@ const List = {
     } else if (!_state.hasPagination) {
       window.removeEventListener("scroll", infiniteHandler);
     }
+    IOHandler();
+  },
+  clean() {
+    _state = { apiData: [], page: 0, hasPagination: true };
+    _isFirstRender = true;
+    _root = null;
+    _components = [];
   },
 };
 

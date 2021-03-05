@@ -20,7 +20,7 @@ const domController = (el, ...arg) => {
   return el;
 };
 
-let root = null;
+let cur = {};
 
 const shouldUpdate = (el, tmpl) => {
   return el.innerHTML !== tmpl;
@@ -28,8 +28,12 @@ const shouldUpdate = (el, tmpl) => {
 
 const Dom = {
   print(el, tmpl) {
-    if (root === null) {
-      root = document.querySelector("#root");
+    if (cur !== el) {
+      // 이전 컴포넌트 초기화
+      if (cur.clean) {
+        cur.clean();
+      }
+      cur = el;
     }
     const startUpdate = shouldUpdate(el, tmpl);
 

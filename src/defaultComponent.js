@@ -47,6 +47,8 @@ const Component = {
   },
 
   _afterRender() {}, // mount 후에 이벤트 걸거나 할때
+
+  clean() {}, // 상태 초기화 필요할때
 };
 
 export default Component;
