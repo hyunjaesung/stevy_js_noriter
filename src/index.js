@@ -1,8 +1,8 @@
 // Test import of styles
 import "./styles/style.scss";
 
-import Router from "./Router";
-import Dom from "./Dom";
+import Router from "./components/Router";
+import Dom from "./components/Dom";
 import Header from "./components/Header";
 import List from "./components/List";
 

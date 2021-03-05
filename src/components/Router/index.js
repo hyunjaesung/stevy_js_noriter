@@ -1,5 +1,4 @@
-import type from "../utils/type";
-import Dom from "../Dom";
+import type from "../../utils/type";
 
 let _components = []; // {route, component}[]
 let _root = null;
@@ -50,7 +49,6 @@ const Router = {
     if (component === undefined) {
       window.location.href = window.location.origin;
     } else {
-      console.log(component);
       component.render({ root: _root });
     }
   },

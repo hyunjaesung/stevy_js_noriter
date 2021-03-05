@@ -1,4 +1,4 @@
-import Dom from "../../Dom";
+import Dom from "../Dom";
 import template from "./template";
 
 let _state = null;

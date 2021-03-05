@@ -1,4 +1,4 @@
-import Dom from "../../Dom";
+import Dom from "../Dom";
 import throttle from "../../utils/throttle";
 import { getGifData } from "./api";
 import template from "./template";
