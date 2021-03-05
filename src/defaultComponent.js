@@ -16,7 +16,10 @@ const Component = {
     return `<div id="component" ></div>`;
   },
 
-  _beforeRender() {}, // 렌더전에 state에 값 넣거나 할때
+  _beforeRender() {
+    try {
+    } catch (e) {}
+  }, // 렌더전에 state에 값 넣거나 할때
 
   render({ root, props = {} } = {}) {
     if (root) {
