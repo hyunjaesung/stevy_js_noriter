@@ -1,6 +1,6 @@
 const Item = ({ url }) => `
         <div class="gif_item">
-            <img src=${url}>
+            <div class="thumb" style="background: url(${url}) no-repeat center center"></div>
         </div>
     `;
 

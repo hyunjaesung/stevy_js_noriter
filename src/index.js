@@ -1,5 +1,5 @@
 // Test import of styles
-// import "./styles/index.scss";
+import "./styles/style.scss";
 
 import Router from "./Router";
 import Dom from "./Dom";

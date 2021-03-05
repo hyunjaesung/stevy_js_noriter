@@ -23,18 +23,7 @@ const domController = (el, ...arg) => {
 let root = null;
 
 const shouldUpdate = (el, tmpl) => {
-  if (el === root && el.innerHTML === "" && !el.outerHTML.includes("id=")) {
-    return true;
-  }
-  const beforeHTML = root.outerHTML;
-  const beforeEl = el.outerHTML;
-
-  const [rootContainer, rootContainerClose] = beforeHTML.split(beforeEl);
-  const [elContainer, elContainerClose] = beforeEl.split(el.innerHTML);
-
-  const afterHTML = `${rootContainer}${elContainer}${tmpl}${elContainerClose}${rootContainerClose}`;
-
-  return beforeHTML !== afterHTML;
+  return el.innerHTML !== tmpl;
 };
 
 const Dom = {
