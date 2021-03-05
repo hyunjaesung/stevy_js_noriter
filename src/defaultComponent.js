@@ -3,7 +3,7 @@ import Dom from "../../Dom";
 let _state = {};
 let _root = null;
 let _isFirstRender = true;
-let _injection = [];
+let _injection = new Set([]);
 
 const template = () => `
     <span>Component</span>
@@ -12,8 +12,19 @@ const template = () => `
 const Component = {
   init(injection) {
     // 따로 외부에 root 설정 하거나 의존성 필요한 컴퍼넌트 넣거나 할때
+    Component.inject(injection);
     window.addEventListener("DOMContentLoaded", this.render);
     return `<div id="component" ></div>`;
+  },
+
+  inject(injection) {
+    if (injection instanceof Array) {
+      injection.forEach((component) => {
+        _injection.push(component);
+      });
+    } else {
+      _injection.push(injection);
+    }
   },
 
   _beforeRender() {
