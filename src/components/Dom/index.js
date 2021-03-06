@@ -30,10 +30,6 @@ const domController = (el, ...arg) => {
 
 let cur = {};
 
-const shouldUpdate = (el, tmpl) => {
-  return el.innerHTML !== tmpl;
-};
-
 const Dom = {
   print(el, tmpl) {
     if (cur !== el) {
@@ -43,11 +39,7 @@ const Dom = {
       }
       cur = el;
     }
-    const startUpdate = shouldUpdate(el, tmpl);
-
-    if (startUpdate) {
-      domController(el, "PinnerHTML", tmpl);
-    }
+    domController(el, "PinnerHTML", tmpl);
   },
   control(el, ...arg) {
     domController(el, ...arg);
