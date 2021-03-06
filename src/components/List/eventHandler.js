@@ -1,3 +1,5 @@
+import Dom from "../Dom";
+
 export function infiniteScrollHandler(e) {
   const scrollHeight = document.documentElement.scrollHeight;
   const scrollTop = document.documentElement.scrollTop;
@@ -12,11 +14,13 @@ export const clickHandler = (e) => {
   const gifWrapper = e.target.closest(".gif_item");
   if (!gifWrapper) return;
   const modal = gifWrapper.querySelector(".modal");
-  if (modal.classList.contains("hidden")) {
-    modal.classList.remove("hidden");
-  } else {
-    modal.classList.add("hidden");
-  }
+
+  Dom.control(modal, "PclassList", "hidden");
+  // if (modal.classList.contains("hidden")) {
+  //   modal.classList.remove("hidden");
+  // } else {
+  //   modal.classList.add("hidden");
+  // }
 };
 
 export const IOHandler = () => {
@@ -29,9 +33,14 @@ export const IOHandler = () => {
       if (entry.isIntersecting) {
         let lazyImage = entry.target;
         if (lazyImage.style.backgroundImage === `url("")`) {
-          lazyImage.style.backgroundImage = `url(${lazyImage.dataset.imgurl})`;
+          Dom.control(
+            lazyImage,
+            "backgroundImage",
+            `url(${lazyImage.dataset.imgurl})`,
+            "PclassList",
+            "lazy"
+          );
         }
-        lazyImage.classList.remove("lazy");
         lazyImageObserver.unobserve(lazyImage);
       }
     });

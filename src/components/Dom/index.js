@@ -9,7 +9,15 @@ const domController = (el, ...arg) => {
           el.setAttribute(k.substr(1), it);
           break;
         case "P":
-          el[k.substr(1)] = it;
+          if (k.substr(1) === "classList") {
+            if (el.classList.contains(it)) {
+              el.classList.remove(it);
+            } else {
+              el.classList.add(it);
+            }
+          } else {
+            el[k.substr(1)] = it;
+          }
           break;
         default:
           el.style[k] = it;
@@ -40,6 +48,9 @@ const Dom = {
     if (startUpdate) {
       domController(el, "PinnerHTML", tmpl);
     }
+  },
+  control(el, ...arg) {
+    domController(el, ...arg);
   },
 };
 
