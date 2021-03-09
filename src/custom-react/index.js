@@ -149,7 +149,7 @@ function workLoop(deadline) {
   let shouldYield = false;
   while (nextUnitOfWork && !shouldYield) {
     console.log("---------------workLoop------------");
-    console.log("nextUnitOfWork", nextUnitOfWork);
+    console.log("nextUnitOfWork", nextUnitOfWork, "wipFiber", wipFiber);
     nextUnitOfWork = performUnitOfWork(nextUnitOfWork);
     shouldYield = deadline.timeRemaining() < 1;
   }
@@ -249,17 +249,17 @@ function updateHostComponent(fiber) {
 }
 
 // 오래된 fiber을 새로운 엘리먼트로 재조정
-function reconcileChildren(wipFiber, elements) {
+function reconcileChildren(fiber, elements) {
   console.log("-------------Reconciller-------------");
   let index = 0;
-  let oldFiber = wipFiber.alternate && wipFiber.alternate.child;
+  let oldFiber = fiber.alternate && fiber.alternate.child;
   let prevSibling = null;
 
   // effectTag 붙인 Fiber 만들기
   // 오래된 fiber(wipFiber.alternate)의 자식들(children)과 지금 자식들의 배열을 동시에 순회 하며 비교
   while (index < elements.length || oldFiber != null) {
     const element = elements[index];
-    console.log("wipFiber", wipFiber, "oldFiber", oldFiber, "element", element);
+    console.log("fiber", fiber, "oldFiber", oldFiber, "element", element);
     // 오래된 fiber 와 우리가 render 하고싶은 element간의 차이 파악
     let newFiber = null;
 
@@ -271,7 +271,7 @@ function reconcileChildren(wipFiber, elements) {
         type: oldFiber.type,
         props: element.props,
         dom: oldFiber.dom,
-        parent: wipFiber,
+        parent: fiber,
         alternate: oldFiber,
         effectTag: "UPDATE", // 커밋 단계에서 사용할 타입
       };
@@ -282,7 +282,7 @@ function reconcileChildren(wipFiber, elements) {
         type: element.type,
         props: element.props,
         dom: null,
-        parent: wipFiber,
+        parent: fiber,
         alternate: null,
         effectTag: "PLACEMENT", // 새로운 DOM노드가 필요한 경우
       };
@@ -298,8 +298,8 @@ function reconcileChildren(wipFiber, elements) {
     }
 
     if (index === 0) {
-      console.log(wipFiber, "insert");
-      wipFiber.child = newFiber;
+      console.log(fiber, "insert");
+      fiber.child = newFiber;
     } else if (element) {
       prevSibling.sibling = newFiber;
     }
