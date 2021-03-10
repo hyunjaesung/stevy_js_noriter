@@ -235,6 +235,7 @@ function useState(initial) {
   };
 
   wipFiber.hooks.push(hook);
+  console.log("hook insert", wipFiber);
   hookIndex++;
   return [hook.state, setState];
 }
