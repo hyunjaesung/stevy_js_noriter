@@ -1,13 +1,13 @@
 const iterable = {
   i: [1, 2, 3, 4, 5],
   [Symbol.iterator]() {
-    const ref = this;
+    // const ref = this;
     let index = 0;
     return {
-      next() {
-        return ref.i.length === index
+      next: () => {
+        return this.i.length === index
           ? { done: true }
-          : { value: ref.i[index++], done: false };
+          : { value: this.i[index++], done: false };
       },
       [Symbol.iterator]() {
         return this;
