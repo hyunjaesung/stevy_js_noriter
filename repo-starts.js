@@ -10,19 +10,24 @@ const jobs = {
   default: 'webpack-p',
   choices: [
     {
-        name: '🎃 Giphy로 SPA 만들기 ',
+        name: ' 🎃 Giphy로 SPA 만들기 ',
         value: 'custom-spa-giphy-start',
         short: '\nGiphy로 SPA 만들기',
     },
     {
-        name: '💀 코드스피츠 OOP MVVM 연습 ',
+        name: ' 💀 코드스피츠 OOP MVVM 연습 ',
         value: 'oop-js-mvvm',
         short: '\n코드스피츠 OOP MVVM 연습',
     },
     {
-        name: '🦋 커스텀 리액트 연습',
+        name: ' 🦋 커스텀 리액트 연습',
         value: 'custom-react',
         short: '\n커스텀 리액트 연습',
+    },
+    {
+      name: ' 🐉 함수형 프로그래밍 연습',
+      value: 'functional-ts',
+      short: '\n함수형 프로그래밍 연습',
     },
     choiceSep,
     { name: '😢  종료', value: 'exit', short: '\n' },

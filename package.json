@@ -10,6 +10,7 @@
     "custom-spa-giphy-start": "cross-env NODE_ENV=development ROOT=custom-spa-giphy webpack serve --config config/webpack.dev.js",
     "oop-js-mvvm": "cross-env NODE_ENV=development ROOT=oop-js-mvvm webpack serve --config config/webpack.dev.js",
     "custom-react": "cross-env NODE_ENV=development ROOT=custom-react webpack serve --config config/webpack.dev.js",
+    "functional-ts": "cross-env NODE_ENV=development ROOT=functional-ts webpack serve --config config/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "lint": "eslint . src config || true"
   },
