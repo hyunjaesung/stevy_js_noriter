@@ -35,36 +35,36 @@ const pipe = (f, ...fs) => (...as) => go(f(...as), ...fs);
 
 // console.log(map(el => el.nodeName)(document.querySelectorAll('*')));
 
-const products = [
-  { name: "반팔티", price: 15000 },
-  { name: "긴팔티", price: 20000 },
-  { name: "핸드폰케이스", price: 15000 },
-  { name: "후드티", price: 30000 },
-  { name: "바지", price: 25000 },
-];
+// const products = [
+//   { name: "반팔티", price: 15000 },
+//   { name: "긴팔티", price: 20000 },
+//   { name: "핸드폰케이스", price: 15000 },
+//   { name: "후드티", price: 30000 },
+//   { name: "바지", price: 25000 },
+// ];
 
-const total_price = pipe(
-  map((item) => item.price),
-  reduce((acc, price) => acc + price)
-);
-console.log(total_price(products));
+// const total_price = pipe(
+//   map((item) => item.price),
+//   reduce((acc, price) => acc + price)
+// );
+// console.log(total_price(products));
 
-const total_price2 = (items) =>
-  items.map((item) => item.price).reduce((acc, price) => acc + price);
+// const total_price2 = (items) =>
+//   items.map((item) => item.price).reduce((acc, price) => acc + price);
 
-console.log(total_price2(products));
+// console.log(total_price2(products));
 
-const base_total_price = (f) =>
-  pipe((products) => products.filter(f), total_price2);
+// const base_total_price = (f) =>
+//   pipe((products) => products.filter(f), total_price2);
 
-go(
-  products,
-  base_total_price((p) => p.price < 20000),
-  console.log
-);
+// go(
+//   products,
+//   base_total_price((p) => p.price < 20000),
+//   console.log
+// );
 
-go(
-  products,
-  base_total_price((p) => p.price >= 20000),
-  console.log
-);
+// go(
+//   products,
+//   base_total_price((p) => p.price >= 20000),
+//   console.log
+// );
