@@ -80,7 +80,9 @@ a {
   justify-content: center;
   height: 3em;
   font-size: 2.5rem;
+  top: 40vh;
   margin-bottom: 2px;
+  opacity: 0;
 }
 
 .main-message small {
@@ -136,6 +138,16 @@ a {
   background-color: rgb(29, 29, 31);
 }
 
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%;
+}
+
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%;
+}
+
 .mid-message {
   text-align: justify;
   max-width: 1000px;
@@ -173,7 +185,6 @@ a {
 .sticky-elem {
   display: none;
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
 }
@@ -221,5 +232,14 @@ a {
   .canvas-caption {
     /* 설명은 좀 고정되게 의도 */
     font-size: 2rem;
+  }
+
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%;
+  }
+
+  #scroll-section-2 .c {
+    left: 55%;
   }
 }
