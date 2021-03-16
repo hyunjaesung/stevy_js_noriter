@@ -22,10 +22,12 @@ a{
 
 .global-nav{
     height: 44px;
+    padding: 0 1rem;
 }
 .local-nav{
     height: 52px;
-    border-bottom:1px solid #ddd
+    border-bottom:1px solid #ddd;
+    padding: 0 1rem;
 }
 .global-nav-links,
 .local-nav-links{
@@ -51,4 +53,148 @@ a{
     /* not은 걔를 빼고 */
     font-size: 0.8rem;
     margin-left:2em;
+}
+
+.scroll-section{
+    padding-top:50vh;
+}
+
+#scroll-section-0 h1{
+    font-size:4rem;
+    text-align: center;
+}
+
+/* 텍스트가 스크롤해도 다 같은 위치에 있다 */
+.main-message{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 3em;
+    font-size:2.5rem;
+    margin-bottom: 2px;
+}
+
+.main-message small{
+    font-size:1.2rem;
+    margin-bottom:0.5em;
+}
+
+.main-message p{
+    font-weight: bold;
+    text-align: center;
+    /* 자간 */
+    line-height: 1.2;
+}
+
+#scroll-section-2 .main-message{
+    font-size:3.5rem;
+}
+
+.description{
+    /* 컨테이너보다 내부요소를 제한하는게 낫다 왜냐면 바깥쪽 비디오는 더클수도 있으니 */
+    max-width: 1000px;
+    margin:0 auto;
+    padding: 0 1rem;
+    font-size:1.2rem;
+    color: #888;
+}
+
+.description strong{
+    float:left;
+    /* 문단 사이에 끼우기 */
+    margin-right:0.2em; 
+    /* em은 현재 글자크기의 0.2배 */
+    font-size: 3rem;
+    /* 지금 지정해놓은 font-size가 14px이라서 1rem은 14px */
+    color: rgb(29,29,31);
+}
+/* 폰트사이즈만 rem 으로 하는건 현재 컨테이너에서 크기를 정하는것 */
+/* em으로하면 현재 내 폰트 사이즈를 활용 할수 있어서 섞어서 한다 */
+/* 
+    rem은 html요소의 폰트사이즈 기준
+    em은 지정된 요소의 폰트사이즈 기준
+*/
+
+.desc-message{
+    font-weight: bold;
+    width:50%;
+    margin-bottom:0.2rem;
+}
+
+.pin{
+    width:1px;
+    height: 100px;
+    background-color: rgb(29,29,31);
+}
+
+.mid-message{
+    text-align: justify;
+    max-width: 1000px;
+    padding: 0 1rem;
+    font-size: 2rem;
+    color: #888;
+    margin:0 auto;
+}
+
+.mid-message strong{
+    display: block;
+    color: rgb(29,29,31);
+    max-width: 1000px;
+    margin:0 auto;
+}
+
+.canvas-caption {
+    max-width: 1000px;
+    margin:0 auto;
+    color: #888;
+    padding:0 1rem;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    color:wheat;
+    background-color:orange;
+}
+/* 데스크탑 대응 */
+@media (min-width : 1024px){
+    #scroll-section-0 h1{
+        font-size: 9vw;
+    }
+
+    .main-message{
+        font-size: 4vw;
+    }
+    
+    .description{
+        font-size:2rem;
+    }
+
+    .description strong{
+        font-size:6rem;
+    }
+
+    #scroll-section-2 .main-message{
+        font-size: 6vw;
+    }
+
+    .main-message small{
+        font-size:1.5vw;
+    }
+
+    .desc-message{
+        width:20%
+    }
+
+    .mid-message{
+        font-size:4vw;
+    }
+    .canvas-caption{
+        /* 설명은 좀 고정되게 의도 */
+        font-size: 2rem;
+    }
 }
