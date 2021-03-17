@@ -176,6 +176,7 @@
 		}
 		document.body.setAttribute('id', `show-scene-${currentScene}`);
 
+		//캔버스 크기 및 정렬 맞추는 부분 
 		const heightRatio = window.innerHeight / 1080;
 		sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
 		sceneInfo[2].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`;
@@ -358,6 +359,7 @@
 				break;
 
 			case 3:
+				// 꽉 차게 하는 계산
 				// console.log('3 play');
 				let step = 0;
 				// 가로/세로 모두 꽉 차게 하기 위해 여기서 세팅(계산 필요)
@@ -377,11 +379,13 @@
 				objs.context.fillStyle = 'white';
 				objs.context.drawImage(objs.images[0], 0, 0);
 
+				// 하얀 박스 계산
 				// 캔버스 사이즈에 맞춰 가정한 innerWidth와 innerHeight
-				const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+				const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio; // 스크롤 바 때문에 바디의 폭을 써서 계산
 				const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
 				if (!values.rectStartY) {
+					// 애니메이션 시작 타이밍 잡기
 					// values.rectStartY = objs.canvas.getBoundingClientRect().top;
 					values.rectStartY = objs.canvas.offsetTop + (objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2;
 					values.rect1X[2].start = (window.innerHeight / 2) / scrollHeight;
