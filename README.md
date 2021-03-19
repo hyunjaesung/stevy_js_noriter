@@ -29,3 +29,8 @@
 - 함수형 컴포넌트의 경우 init할때 useState 실행되면서 wipFiber에 hooks 집어넣고 시작
 
 - 참고 : [https://bluewings.github.io/build-your-own-react/](https://bluewings.github.io/build-your-own-react/)
+
+## 생각해 볼 주제
+- [ ] 리액트 SSR 해보기
+- [ ] 함수형 + 객체지향 공부한 것 바탕으로 SPA 설계 및 구현 해보기
+- [ ] HTML5를 이용한 인터렉티브 개발 연습해보기
