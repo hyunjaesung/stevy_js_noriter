@@ -1,11 +1,11 @@
 # 스띠비 JS TS 연습장
 
 ## 개요
- [Giphy + Custom SPA 연습](#Giphy_Custom_SPA_연습)
+ [Giphy + Custom SPA 연습](https://github.com/hyunjaesung/stevy_js_practice/tree/main/src/custom-spa-giphy)
 
- [코드스피츠 OOP MVVM 연습](#코드스피츠_OOP_MVVM_연습)
+ [코드스피츠 OOP MVVM 연습](https://github.com/hyunjaesung/stevy_js_practice/tree/main/src/oop-js-mvvm)
 
- [커스텀 리액트 연습](#커스텀_리액트_연습)
+ [커스텀 리액트 연습](https://github.com/hyunjaesung/stevy_js_practice/tree/main/src/custom-react)
 
 
 ## 생각해 볼 주제
