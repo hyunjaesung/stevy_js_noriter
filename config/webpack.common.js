@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const PrettierPlugin = require("prettier-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const paths = require("./paths");
-var glob = require('glob');
+var glob = require("glob");
 
 module.exports = {
   // Where webpack looks to start building the bundle
@@ -18,7 +18,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
 
   // Customize the webpack build process
@@ -62,14 +62,28 @@ module.exports = {
   // Determine how modules within the project are treated
   module: {
     rules: [
-      { test: /\.(?:js|tsx?)$/, use: ["babel-loader"] },
+      {
+        test: /\.(?:js|tsx?)$/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              [
+                "@babel/preset-env",
+                {
+                  targets: { chrome: "55" },
+                },
+              ],
+            ],
+          },
+        },
+      },
 
       // Images: Copy image files to build folder
       { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: "asset/resource" },
 
       // Fonts and SVGs: Inline files
       { test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, type: "asset/inline" },
-
     ],
   },
 };
