@@ -29,6 +29,11 @@ const jobs = {
       value: 'functional-js',
       short: '\n함수형 프로그래밍 연습',
     },
+    {
+      name: ' 🐎 async iterator 연습',
+      value: 'asyncIterator-practice',
+      short: '\nasync iterator 연습',
+    },
     choiceSep,
     { name: '😢  종료', value: 'exit', short: '\n' },
     choiceSep,

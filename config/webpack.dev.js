@@ -17,7 +17,7 @@ module.exports = merge(common, {
     open: true,
     compress: true,
     hot: true,
-    port: 3000,
+    port: 5000
   },
 
   module: {
@@ -28,18 +28,18 @@ module.exports = merge(common, {
         use: [
           "style-loader",
           {
-            loader: "css-loader",
+            loader: "css-loader"
             // options: { sourceMap: true, importLoaders: 1, modules: true },
           },
           { loader: "postcss-loader", options: { sourceMap: false } },
-          { loader: "sass-loader", options: { sourceMap: false } },
-        ],
-      },
-    ],
+          { loader: "sass-loader", options: { sourceMap: false } }
+        ]
+      }
+    ]
   },
 
   plugins: [
     // Only update what has changed on hot reload
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+    new webpack.HotModuleReplacementPlugin()
+  ]
 });

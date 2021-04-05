@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: paths.build,
     filename: "[name].bundle.js",
-    publicPath: "/",
+    publicPath: "/"
   },
 
   resolve: {
@@ -33,11 +33,11 @@ module.exports = {
           from: paths.public,
           to: "assets",
           globOptions: {
-            ignore: ["*.DS_Store"],
+            ignore: ["*.DS_Store"]
           },
-          noErrorOnMissing: true,
-        },
-      ],
+          noErrorOnMissing: true
+        }
+      ]
     }),
 
     // Generates an HTML file from a template
@@ -46,7 +46,7 @@ module.exports = {
       title: process.env.ROOT,
       // favicon: paths.src + "/images/favicon.png",
       template: paths.src + "/template.html", // template file
-      filename: "index.html", // output file
+      filename: "index.html" // output file
     }),
 
     // // ESLint configuration
@@ -56,7 +56,7 @@ module.exports = {
     // }),
 
     // Prettier configuration
-    new PrettierPlugin(),
+    new PrettierPlugin()
   ],
 
   // Determine how modules within the project are treated

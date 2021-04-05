@@ -11,6 +11,8 @@
     "oop-js-mvvm": "cross-env NODE_ENV=development ROOT=oop-js-mvvm webpack serve --config config/webpack.dev.js",
     "custom-react": "cross-env NODE_ENV=development ROOT=custom-react webpack serve --config config/webpack.dev.js",
     "functional-js": "cross-env NODE_ENV=development ROOT=functional-js webpack serve --config config/webpack.dev.js",
+    "asyncIterator-practice": "cross-env NODE_ENV=development ROOT=asyncIterator-practice webpack serve --config config/webpack.dev.js",
+    "mock": "json-server --watch mock.json",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
     "lint": "eslint . src config || true"
   },
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.1",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.13.0",
     "babel-loader": "^8.1.0",
