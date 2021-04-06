@@ -8,32 +8,30 @@
  * async await랑 안 어울리고 분리도 쉽지 않다
  */
 
-// const render = (...urls) => {
-//   Promise.all(urls.map((url) => fetch(url).then((res) => res.json()))).then(
-//     (arr) => {
-//       console.log(arr);
-//     }
-//   );
-// };
+const render = (...urls) => {
+  Promise.all(urls.map(url => fetch(url).then(res => res.json()))).then(arr => {
+    console.log(arr);
+  });
+};
 
 /**
  * 그냥  sequential 하게 처리한 코드
  * 분리가 안 되어 있다
  */
 
-// const render = (...url) => {
-//   const loop = () => {
-//     if (url.length) {
-//       fetch(url.shift())
-//         .then((res) => res.json())
-//         .then((json) => {
-//           console.log(json);
-//           loop();
-//         });
-//     }
-//   };
-//   loop();
-// };
+const render = (...url) => {
+  const loop = () => {
+    if (url.length) {
+      fetch(url.shift())
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          loop();
+        });
+    }
+  };
+  loop();
+};
 
 /**
  * Generator & Executor 패턴
@@ -41,43 +39,43 @@
  */
 
 // 개선전 코드
-// const dataLoader = function* (f, ...urls) {
-//   for (const url of urls) {
-//     const json = yield fetch(url).then((res) => res.json());
-//     f(json);
-//   }
-// };
-// const render = (...urls) => {
-//   const iter = dataLoader(console.log, ...urls);
-//   const next = ({ value, done }) => {
-//     if (!done) value.then((res) => next(iter.next(res)));
-//   };
+const dataLoader = function* (f, ...urls) {
+  for (const url of urls) {
+    const json = yield fetch(url).then(res => res.json());
+    f(json);
+  }
+};
+const render = (...urls) => {
+  const iter = dataLoader(console.log, ...urls);
+  const next = ({ value, done }) => {
+    if (!done) value.then(res => next(iter.next(res)));
+  };
 
-//   next(iter.next());
-// };
+  next(iter.next());
+};
 
 // 개선후 코드
-// const dataLoader = function* (f, ...urls) {
-//   for (const url of urls) {
-//     const json = yield fetch(url).then((res) => res.json());
-//     yield json;
-//   }
-// };
-// const render = (...urls) => {
-//   const iter = dataLoader(...urls);
-//   const next = ({ value, done }) => {
-//     if (!done) {
-//       if (value instanceof Promise) {
-//         value.then((data) => next(iter.next(data)));
-//       } else {
-//         console.log(value);
-//         next(iter.next());
-//       }
-//     }
-//   };
+const dataLoader = function* (f, ...urls) {
+  for (const url of urls) {
+    const json = yield fetch(url).then(res => res.json());
+    yield json;
+  }
+};
+const render = (...urls) => {
+  const iter = dataLoader(...urls);
+  const next = ({ value, done }) => {
+    if (!done) {
+      if (value instanceof Promise) {
+        value.then(data => next(iter.next(data)));
+      } else {
+        console.log(value);
+        next(iter.next());
+      }
+    }
+  };
 
-//   next(iter.next());
-// };
+  next(iter.next());
+};
 
 /**
  * async 만 이용했을 경우
@@ -85,39 +83,39 @@
  */
 
 // async 전
-// const render = function (...urls) {
-//   for (const url of urls) {
-//     fetch(url).then((res) => console.log(res.json()));
-//     //   .then((result) => console.log(result));
-//   }
-// };
+const render = function (...urls) {
+  for (const url of urls) {
+    fetch(url).then(res => console.log(res.json()));
+    //   .then((result) => console.log(result));
+  }
+};
 
 // async 후
-// const render = async function (...urls) {
-//   for (const url of urls) {
-//     const res = await fetch(url);
-//     const result = await res.json();
-//     console.log(result);
-//   }
-// };
+const render = async function (...urls) {
+  for (const url of urls) {
+    const res = await fetch(url);
+    const result = await res.json();
+    console.log(result);
+  }
+};
 
 /**
  * async generator 사용
  * 데이터 로드와 렌더 분리
  */
 
-// const dataLoader = async function* (...urls) {
-//   for (const url of urls) {
-//     const res = await fetch(url);
-//     yield await res.json();
-//   }
-// };
+const dataLoader = async function* (...urls) {
+  for (const url of urls) {
+    const res = await fetch(url);
+    yield await res.json();
+  }
+};
 
-// const render = async function (...urls) {
-//   for await (const json of dataLoader(...urls)) {
-//     console.log(json);
-//   }
-// };
+const render = async function (...urls) {
+  for await (const json of dataLoader(...urls)) {
+    console.log(json);
+  }
+};
 
 /**
  * yield * 연습
@@ -126,68 +124,68 @@
  * yield * 순서에 해당 함수의 next() 시전 하면 위임된 iterable 값 반환
  */
 
-// function* func1() {
-//   yield 42;
-//   yield 22;
-//   yield 11;
-// }
+function* func1() {
+  yield 42;
+  yield 22;
+  yield 11;
+}
 
-// function* func2() {
-// case1
-//   yield* func1();
-// 42 22 11출력
-//
-// case2
-//   yield* (() => {
-//     return 10;
-//   })();
-// Uncaught TypeError: yield* (intermediate value) is not iterable 에러
-//
-// case3
-//yield* 10;
-// Uncaught TypeError: undefined is not a function 에러
-//
-// case4
-//   yield* [1, 2, 3];
-// 1, 2, 3 출력
-//
-// case5
-//   yield 0;
-//   yield* [1, 2, 3];
-//   yield 4;
-// 0 1 2 3 4 출력
-// }
+function* func2() {
+  // case1
+  yield* func1();
+  // 42 22 11출력
 
-// const iter = func2();
+  // case2
+  yield* (() => {
+    return 10;
+  })();
+  // Uncaught TypeError: yield* (intermediate value) is not iterable 에러
 
-// for (const value of iter) {
-//   console.log(value);
-// }
+  // case3
+  yield* 10;
+  // Uncaught TypeError: undefined is not a function 에러
+
+  // case4
+  yield* [1, 2, 3];
+  // 1, 2, 3 출력
+
+  // case5
+  yield 0;
+  yield* [1, 2, 3];
+  yield 4;
+  // 0 1 2 3 4 출력
+}
+
+const iter = func2();
+
+for (const value of iter) {
+  console.log(value);
+}
 
 /**
  * yield * 이용한 위임을 통해서 한번 더 분리
  */
 
-// const urlLoader = async function* (url) {
-//   const res = await fetch(url);
-//   yield await res.json();
-// };
-// const dataLoader = async function* (...urls) {
-//   for (const url of urls) {
-//     yield* urlLoader(url);
-//     // dataLoader 가 urlLoader에게 위임
-//   }
-// };
-// const render = async function (...urls) {
-//   for await (const json of dataLoader(...urls)) {
-//     // dataLoader에게서 위임 받은 urlLoader 의 yield가 여기서 나온다
-//     console.log(json);
-//   }
-// };
+const urlLoader = async function* (url) {
+  const res = await fetch(url);
+  yield await res.json();
+};
+const dataLoader = async function* (...urls) {
+  for (const url of urls) {
+    yield* urlLoader(url);
+    // dataLoader 가 urlLoader에게 위임
+  }
+};
+const render = async function (...urls) {
+  for await (const json of dataLoader(...urls)) {
+    // dataLoader에게서 위임 받은 urlLoader 의 yield가 여기서 나온다
+    console.log(json);
+  }
+};
 
-// render(
-//   "http://localhost:3000/1",
-//   "http://localhost:3000/2",
-//   "http://localhost:3000/3",
-//   "http://localhost:3000/4"
-// );
+render(
+  "http://localhost:3000/1",
+  "http://localhost:3000/2",
+  "http://localhost:3000/3",
+  "http://localhost:3000/4"
+);
