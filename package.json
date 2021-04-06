@@ -14,7 +14,8 @@
     "asyncIterator-practice": "cross-env NODE_ENV=development ROOT=asyncIterator-practice webpack serve --config config/webpack.dev.js",
     "mock": "json-server --watch mock.json",
     "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js",
-    "lint": "eslint . src config || true"
+    "lint": "eslint . src config || true",
+    "push": "git add --all && git commit -m 'update' && git push"
   },
   "keywords": [
     "webpack",
