@@ -183,50 +183,19 @@
 //   }
 // };
 
-// render(
-//   "http://localhost:3000/1",
-//   "http://localhost:3000/2",
-//   "http://localhost:3000/3",
-//   "http://localhost:3000/4"
-// );
-
-// const delay = (delayTime) => {
-//   const start = performance.now();
-//   while (performance.now() - start < delayTime) {}
-// };
-
 // const fakeFetch = (delayTime) => {
-//   console.log(delayTime + "start");
-//   delay(delayTime);
-//   console.log("finish");
 //   return new Promise((resolve, _) => {
-//     console.log(delayTime + "resloved");
-//     resolve({
-//       json() {
-//         return new Promise((resolve, _) => {
-//           resolve(`fake takes ${delayTime}`);
-//         });
-//       },
-//     });
+//     setTimeout(() => {
+//       resolve({
+//         json() {
+//           return new Promise((resolve, _) => {
+//             resolve(`fake takes ${delayTime}`);
+//           });
+//         },
+//       });
+//     }, delayTime);
 //   });
 // };
-// // async generator 이용
-// // const getData = async function* (...times) {
-// //   console.log(4);
-// //   for (const time of times) {
-// //     console.log(5);
-// //     const res = await fakeFetch(time);
-// //     console.log(6);
-// //     yield await res.json();
-// //     console.log(7);
-// //   }
-// // };
-
-// // const render = async function (...times) {
-// //   for await (const result of getData(...times)) {
-// //     console.log(result);
-// //   }
-// // };
 
 // // Promise All 이용
 // // const getData = (...times) => {
@@ -251,4 +220,29 @@
 //   }
 // };
 
-// render(1000, 5000);
+// async generator 이용
+const getData = async function* (...times) {
+  console.log(4);
+  for (const time of times) {
+    console.log(5);
+    const res = await fetch(time);
+    console.log(6);
+    const result = await res.json();
+    console.log(7);
+    yield result;
+    console.log(8);
+  }
+};
+
+const render = async function (...times) {
+  console.log(1);
+  for await (const result of getData(...times)) {
+    console.log(2);
+    console.log(result);
+  }
+  console.log(3);
+};
+
+console.log("out", 1);
+render("http://localhost:3000/1", "http://localhost:3000/2");
+console.log("out", 2);
