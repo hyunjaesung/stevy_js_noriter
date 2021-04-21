@@ -221,16 +221,24 @@
 // };
 
 // async generator 이용
-const getData = async function* (...times) {
-  console.log(4);
+// const getData = async function* (...times) {
+//   console.log(4);
+//   for (const time of times) {
+//     console.log(5);
+//     const res = await fetch(time);
+//     console.log(6);
+//     const result = await res.json();
+//     console.log(7);
+//     yield result;
+//     console.log(8);
+//   }
+// };
+
+const getData = function* (...times) {
   for (const time of times) {
-    console.log(5);
-    const res = await fetch(time);
-    console.log(6);
-    const result = await res.json();
-    console.log(7);
-    yield result;
-    console.log(8);
+    yield fetch(time)
+      .then((res) => res.json())
+      .then((result) => result);
   }
 };
 
