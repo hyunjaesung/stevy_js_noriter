@@ -224,33 +224,61 @@
 // const getData = async function* (...times) {
 //   console.log(4);
 //   for (const time of times) {
-//     console.log(5);
-//     const res = await fetch(time);
-//     console.log(6);
-//     const result = await res.json();
-//     console.log(7);
-//     yield result;
-//     console.log(8);
+// console.log(5);
+// const res = await fetch(time);
+// console.log(6);
+// const result = await res.json();
+// console.log(7);
+// yield result;
+// console.log(8);
 //   }
 // };
 
-const getData = function* (...times) {
-  for (const time of times) {
-    yield fetch(time)
-      .then((res) => res.json())
-      .then((result) => result);
+// const getData = function* (...times) {
+//   for (const time of times) {
+//     yield fetch(time)
+//       .then((res) => res.json())
+//       .then((result) => result);
+//   }
+// };
+
+// const render = async function (...times) {
+//   console.log(1);
+//   for await (const result of getData(...times)) {
+//     console.log(2);
+//     console.log(result);
+//   }
+//   console.log(3);
+// };
+
+// const render = async function (...times) {
+//   for (const time of times) {
+//     const res = await fetch(time);
+//     const result = await res.json();
+//     console.log(result);
+//   }
+// };
+
+// console.log("out", 1);
+// render("http://localhost:3000/1", "http://localhost:3000/2");
+// console.log("out", 2);
+
+
+const gen = function* (arr) {
+  console.log(arr);
+  for (const num of arr) {
+    yield new Promises((resolve) => {
+      setTimeout(() => {
+        resolve(1);
+      }, 2000);
+    })
+      .then((res) => res + num)
+      .then((res) => res + num);
   }
 };
 
-const render = async function (...times) {
-  console.log(1);
-  for await (const result of getData(...times)) {
-    console.log(2);
+const testFunc = (arr) => {
+  for await (const result of gen(arr)) {
     console.log(result);
   }
-  console.log(3);
 };
-
-console.log("out", 1);
-render("http://localhost:3000/1", "http://localhost:3000/2");
-console.log("out", 2);
