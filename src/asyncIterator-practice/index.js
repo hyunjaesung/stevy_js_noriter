@@ -262,23 +262,3 @@
 // console.log("out", 1);
 // render("http://localhost:3000/1", "http://localhost:3000/2");
 // console.log("out", 2);
-
-
-const gen = function* (arr) {
-  console.log(arr);
-  for (const num of arr) {
-    yield new Promises((resolve) => {
-      setTimeout(() => {
-        resolve(1);
-      }, 2000);
-    })
-      .then((res) => res + num)
-      .then((res) => res + num);
-  }
-};
-
-const testFunc = (arr) => {
-  for await (const result of gen(arr)) {
-    console.log(result);
-  }
-};
