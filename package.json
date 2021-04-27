@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node repo-starts.js",
+    "interactive-practice": "cross-env NODE_ENV=development ROOT=interactive-practice webpack serve --config config/webpack.dev.js",
     "custom-spa-giphy-start": "cross-env NODE_ENV=development ROOT=custom-spa-giphy webpack serve --config config/webpack.dev.js",
     "oop-js-mvvm": "cross-env NODE_ENV=development ROOT=oop-js-mvvm webpack serve --config config/webpack.dev.js",
     "custom-react": "cross-env NODE_ENV=development ROOT=custom-react webpack serve --config config/webpack.dev.js",

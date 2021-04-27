@@ -34,6 +34,11 @@ const jobs = {
       value: 'asyncIterator-practice',
       short: '\nasync iterator 연습',
     },
+    {
+      name: ' 🐘 interactive 연습',
+      value: 'interactive-practice',
+      short: '\nasync iterator 연습',
+    },
     choiceSep,
     { name: '😢  종료', value: 'exit', short: '\n' },
     choiceSep,
