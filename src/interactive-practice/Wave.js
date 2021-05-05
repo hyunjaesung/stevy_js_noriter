@@ -2,7 +2,6 @@ import { Point } from "./Point";
 
 export class Wave {
   constructor(index, totalPoints, color) {
-    console.log(color);
     this.index = index;
     this.totalPoints = totalPoints;
     this.color = color;
@@ -14,7 +13,7 @@ export class Wave {
     this.stageHeight = stageHeight;
 
     // 화면 중간 값 가져오기
-    this.centerX = stageWidth / 2;
+    // this.centerX = stageWidth / 2;
     this.centerY = stageHeight / 2;
 
     this.pointGap = this.stageWidth / (this.totalPoints - 1);
