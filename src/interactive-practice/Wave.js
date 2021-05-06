@@ -15,9 +15,7 @@ export class Wave {
     // 화면 중간 값 가져오기
     // this.centerX = stageWidth / 2;
     this.centerY = stageHeight / 2;
-
     this.pointGap = this.stageWidth / (this.totalPoints - 1);
-
     this.init();
   }
 
