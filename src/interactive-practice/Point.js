@@ -12,6 +12,8 @@ export class Point {
     this.current += this.speed;
 
     // sin 함수로 위아래 좌표 번화
-    this.y = this.fixedY + Math.sin(this.current) * this.max;
+    // sin은 -1 과 1 왔다갔다 cos 도 된다
+    this.y = this.fixedY + Math.cos(this.current) * this.max;
+    // this.y = this.fixedY + this.current * this.max;
   }
 }

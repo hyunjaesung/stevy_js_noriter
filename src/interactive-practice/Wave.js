@@ -45,8 +45,11 @@ export class Wave {
       const cy = (prevY + this.points[i].y) / 2;
 
       // 선을 그릴때 지금 값과 이전 값의 중간 값을 적어 줘야지 부드러운 곡선 만들수 있다
-      //   context.lineTo(cx, cy);
+      //   context.lineTo(cx,cy);
       context.quadraticCurveTo(prevX, prevY, cx, cy);
+
+      //   context.arc(prevX, prevY, 35, 0, 2 * Math.PI); // Start point
+      //   context.arc(cx, cy, 15, 0, 2 * Math.PI); // End point
 
       prevX = this.points[i].x;
       prevY = this.points[i].y;
